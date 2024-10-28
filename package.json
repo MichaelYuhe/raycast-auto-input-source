@@ -16,6 +16,13 @@
       "subtitle": "Show list of applications that have been applied an input source.",
       "description": "Show list of applications that have been applied an input source.",
       "mode": "view"
+    },
+    {
+      "name": "app-switch-listener",
+      "title": "App Switch Listener",
+      "description": "Listen to the application switch event.",
+      "mode": "no-view",
+      "interval": "1s"
     }
   ],
   "dependencies": {
