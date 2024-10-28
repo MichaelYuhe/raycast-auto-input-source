@@ -39,7 +39,8 @@ end run
 
 export const GET_ACTIVE_APP_SCRIPT = `
 tell application "System Events"
-    set frontApp to name of first application process whose frontmost is true
+    set frontProcess to first application process whose frontmost is true
+    set frontApp to bundle identifier of frontProcess
     return frontApp
 end tell
 `;
