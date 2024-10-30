@@ -26,15 +26,19 @@ export default function Command() {
 }
 
 function Item({ app }: { app: Application }) {
+  const [inputMethod, setInputMethod] = useState("");
+
   const changeInputMethod = (bundleId: string | undefined, inputMethod: string) => {
     if (!bundleId) return;
     LocalStorage.setItem(bundleId, inputMethod);
+    getInputMethod(bundleId);
   };
 
   const getInputMethod = async (bundleId: string | undefined) => {
-    if (!bundleId) return null;
+    if (!bundleId) return "";
     const inputMethod = await LocalStorage.getItem(bundleId);
-    return inputMethod;
+    setInputMethod(inputMethod as string);
+    return inputMethod || "";
   };
 
   useEffect(() => {
@@ -45,6 +49,7 @@ function Item({ app }: { app: Application }) {
     <List.Item
       key={app.bundleId}
       title={app.name}
+      subtitle={inputMethod || ""}
       actions={
         <ActionPanel>
           {Object.entries(INPUT_METHODS).map(([key, value]) => (
