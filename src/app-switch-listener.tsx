@@ -8,18 +8,22 @@ export default async function Command() {
     showHUD("No active application");
     return;
   }
+  console.log("appBundleId", appBundleId);
 
-  LocalStorage.setItem("prevAppBundleId", appBundleId);
   const prevAppBundleId = await LocalStorage.getItem("prevAppBundleId");
-  if (prevAppBundleId === appBundleId) {
-    return;
-  }
+  console.log("prevAppBundleId", prevAppBundleId);
+  // if (prevAppBundleId === appBundleId) {
+  //   return;
+  // }
+  LocalStorage.setItem("prevAppBundleId", appBundleId);
 
   const inputMethod = await LocalStorage.getItem(appBundleId);
   if (!inputMethod) {
     showHUD("No input method applied");
     return;
   }
+  
+  console.log("inputMethod", inputMethod);
 
   const res = await runAppleScript(SWITCH_INPUT_METHOD_SCRIPT, [inputMethod as string]);
   console.log("res", res);
